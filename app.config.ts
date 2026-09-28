@@ -18,13 +18,12 @@ const ADMOB_ANDROID_TEST_APP_ID = 'ca-app-pub-3940256099942544~3347511713';
 const ADMOB_IOS_TEST_APP_ID = 'ca-app-pub-3940256099942544~1458002511';
 
 const BUNDLE_ID = process.env.APP_BUNDLE_ID ?? 'com.logiqueprod.tuparlesjeune';
-const EAS_PROJECT_ID = process.env.EAS_PROJECT_ID?.trim();
+const EAS_PROJECT_ID = 'fd2c392c-65ce-4ded-bc08-891455c43f89';
 const SHARE_BASE_URL = process.env.EXPO_PUBLIC_SHARE_BASE_URL ?? 'https://tuparlesjeune.app';
 const SHARE_HOST = new URL(SHARE_BASE_URL).hostname;
 
 if (IS_PRODUCTION_BUILD) {
   const required = [
-    'EAS_PROJECT_ID',
     'EXPO_PUBLIC_SUPABASE_URL',
     'EXPO_PUBLIC_SUPABASE_ANON_KEY',
     'ADMOB_ANDROID_APP_ID',

@@ -29,7 +29,7 @@ Pour tester sur ton téléphone avec les vraies pubs de test et les achats, il f
 
 ```bash
 npx eas-cli@latest login
-npx eas-cli@latest init        # crée le projet EAS et donne l'EAS_PROJECT_ID
+npx eas-cli@latest whoami      # vérifie le compte Expo utilisé
 npm run build:dev              # build de dev iOS/Android dans le cloud, sans Mac
 npm start                      # puis scanne le QR code avec l'app installée
 ```

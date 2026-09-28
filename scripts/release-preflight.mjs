@@ -2,7 +2,6 @@ import { readFileSync } from 'node:fs';
 import process from 'node:process';
 
 const required = [
-  'EAS_PROJECT_ID',
   'EXPO_PUBLIC_SUPABASE_URL',
   'EXPO_PUBLIC_SUPABASE_ANON_KEY',
   'ADMOB_ANDROID_APP_ID',

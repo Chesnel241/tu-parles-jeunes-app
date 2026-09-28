@@ -45,16 +45,19 @@ Suis [supabase/README.md](../supabase/README.md). À la fin, tu as `EXPO_PUBLIC_
 Les valeurs ne vont pas dans le code. On les enregistre dans EAS, par environnement :
 
 ```bash
-npx eas-cli@latest env:create --environment production --name EXPO_PUBLIC_BACKEND --value supabase --visibility plaintext
-npx eas-cli@latest env:create --environment production --name EXPO_PUBLIC_SUPABASE_URL --value https://xxxx.supabase.co --visibility plaintext
-npx eas-cli@latest env:create --environment production --name EXPO_PUBLIC_SUPABASE_ANON_KEY --value eyJ... --visibility plaintext
-npx eas-cli@latest env:create --environment production --name ADMOB_ANDROID_APP_ID --value ca-app-pub-XXX~YYY --visibility sensitive
-npx eas-cli@latest env:create --environment production --name ADMOB_IOS_APP_ID --value ca-app-pub-XXX~ZZZ --visibility sensitive
+npx eas-cli@latest env:set production --name EXPO_PUBLIC_BACKEND --value supabase --visibility plaintext --non-interactive
+npx eas-cli@latest env:set production --name EXPO_PUBLIC_SUPABASE_URL --value https://xxxx.supabase.co --visibility plaintext --non-interactive
+npx eas-cli@latest env:set production --name EXPO_PUBLIC_SUPABASE_ANON_KEY --value sb_publishable_... --visibility plaintext --non-interactive
+npx eas-cli@latest env:set production --name ADMOB_ANDROID_APP_ID --value ca-app-pub-XXX~YYY --visibility sensitive --non-interactive
+npx eas-cli@latest env:set production --name ADMOB_IOS_APP_ID --value ca-app-pub-XXX~ZZZ --visibility sensitive --non-interactive
 # idem pour EXPO_PUBLIC_ADMOB_REWARDED_ANDROID, _IOS, EXPO_PUBLIC_ADMOB_INTERSTITIAL_ANDROID, _IOS,
 # EXPO_PUBLIC_REVENUECAT_IOS_KEY, EXPO_PUBLIC_REVENUECAT_ANDROID_KEY,
 # EXPO_PUBLIC_PRIVACY_URL, EXPO_PUBLIC_TERMS_URL, EXPO_PUBLIC_ACCOUNT_DELETION_URL,
-# EXPO_PUBLIC_SUPPORT_EMAIL, EXPO_PUBLIC_SHARE_BASE_URL et EAS_PROJECT_ID
+# EXPO_PUBLIC_SUPPORT_EMAIL et EXPO_PUBLIC_SHARE_BASE_URL
 ```
+
+L'identifiant du projet EAS est déjà relié dans `app.config.ts` ; il ne doit pas être
+dupliqué dans les variables d'environnement.
 
 Rappel : tout ce qui commence par `EXPO_PUBLIC_` est lisible dans l'app. C'est normal pour ces valeurs (la clé Supabase « anon » est publique par conception). N'y mets jamais de clé « service_role » ni de mot de passe.
 

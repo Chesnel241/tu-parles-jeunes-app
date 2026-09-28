@@ -103,7 +103,7 @@ create index games_week_idx on public.games (created_at);
 create index games_user_idx on public.games (user_id, created_at);
 
 create table public.duels (
-  id text primary key default encode(gen_random_bytes(6), 'hex'),
+  id text primary key default encode(extensions.gen_random_bytes(6), 'hex'),
   creator_id uuid not null references public.profiles(id) on delete cascade,
   opponent_id uuid references public.profiles(id) on delete cascade,
   question_ids text[] not null check (array_length(question_ids, 1) = 5),
@@ -343,7 +343,7 @@ end $$;
 -- Fin de partie : le SERVEUR recalcule le score (impossible de tricher en envoyant « 5/5 »).
 create or replace function public.submit_game(p_mode text, p_question_ids text[], p_answers smallint[], p_duel_id text default null)
 returns smallint language plpgsql security definer set search_path = public as $$
-declare me public.profiles := public._me(); v_score smallint := 0; i int; q public.questions; d public.duels;
+declare me public.profiles := public._me(); v_score smallint := 0; q public.questions; d public.duels;
 begin
   if p_mode not in ('quick', 'daily', 'darons', 'duel') then raise exception 'mode inconnu' using errcode = '22023'; end if;
   if array_length(p_question_ids, 1) is distinct from 5 or array_length(p_answers, 1) is distinct from 5 then
