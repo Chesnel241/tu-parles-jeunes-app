@@ -2,6 +2,28 @@
 
 Le code refuse désormais un build `production` tant que la configuration critique est absente. Ces éléments dépendent des comptes et de l'identité du propriétaire ; ils ne doivent pas être inventés dans le dépôt.
 
+## État vérifié au 28 septembre 2026
+
+### Terminé
+
+- Dépôt GitHub initialisé et branche `main` publiée.
+- Projet EAS lié à `@chesnels-team/tu-parles-jeune` ; variables Supabase et AdMob enregistrées pour `preview` et `production`.
+- Build Android interne EAS `1.0.0 (1)` réussi au commit `9b9ce2d` et disponible en APK.
+- Projet Supabase `nrfseoncfxwxykzrggfa` lié, migrations et seed appliqués, connexion anonyme activée, RLS vérifiée et `supabase db lint` sans erreur.
+- Fiches AdMob Android et iOS créées avec un bloc interstitiel et un bloc récompensé sur chaque plate-forme.
+- AdMob limité au niveau **Adolescents** ; toutes les catégories sensibles, l'alcool et les jeux d'argent sont bloqués.
+- Fiche Google Play créée pour `com.logiqueprod.tuparlesjeune`.
+
+### Bloqué par des informations ou validations du propriétaire
+
+- AdMob : compléter le profil de paiement. Tant qu'il ne l'est pas, Google n'examine pas les applications et ne diffuse pas les annonces.
+- Google Play : configurer le compte marchand avant de créer le produit ponctuel `no_ads`. Un test fermé avec au moins 12 testeurs pendant 14 jours est ensuite obligatoire avant la demande d'accès à la production.
+- RevenueCat : créer le projet, les applications, l'entitlement `no_ads` et l'offering après création des produits dans les deux stores.
+- Apple : rétablir l'accès App Store Connect, créer la fiche et le produit intégré, puis configurer TestFlight.
+- Juridique : fournir l'identité de l'éditeur, le domaine HTTPS et l'adresse de support afin de remplacer les placeholders et publier les pages légales.
+- Supabase : le projet actuel est hébergé à Londres (`eu-west-2`). Valider ce choix de résidence ou recréer le projet dans une région UE avant la publication.
+- Appareils : exécuter la recette finale sur de vrais appareils iOS et Android, notamment achats, restauration, consentement, accessibilité et réseau dégradé.
+
 ## À fournir
 
 1. **Identité juridique** : raison sociale, forme, adresse, SIREN, e-mail surveillé, date et région Supabase. Remplacer tous les crochets dans `CONFIDENTIALITE.md` et `CGU.md`, puis faire valider les textes.

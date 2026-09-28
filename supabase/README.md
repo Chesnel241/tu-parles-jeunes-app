@@ -10,7 +10,7 @@
    ```
    EXPO_PUBLIC_BACKEND=supabase
    EXPO_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
-   EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+   EXPO_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_...
    ```
 6. Crée ton compte modérateur : lance l'app une fois, choisis un pseudo, puis :
    ```sql
