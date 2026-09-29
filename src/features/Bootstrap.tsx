@@ -27,6 +27,7 @@ export function Bootstrap() {
   useEffect(() => {
     if (!onboarded) return;
     let alive = true;
+    let unsubscribe: () => void = () => undefined;
     (async () => {
       try {
         await initializeBackend();
@@ -35,10 +36,19 @@ export function Bootstrap() {
       }
       await ads.init({ underAgeOfConsent: isUnderAgeOfConsent(ageRange) });
       await purchases.init();
-      if (alive && purchases.available) setNoAds(await purchases.hasNoAds());
+      if (purchases.available) {
+        const stop = purchases.subscribeNoAds((active) => {
+          if (alive) setNoAds(active);
+        });
+        if (alive) {
+          unsubscribe = stop;
+          setNoAds(await purchases.hasNoAds());
+        } else stop();
+      }
     })();
     return () => {
       alive = false;
+      unsubscribe();
     };
   }, [onboarded, ageRange, setNoAds]);
 

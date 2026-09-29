@@ -87,7 +87,7 @@ Google Play : Oui. App Store : rien à cocher, mais les annonces sont décrites 
 | Position | Position approximative (via l'IP, par AdMob) | Oui | Oui | Publicité |
 | Appareil ou autres ID | Identifiant publicitaire | Oui | Oui | Publicité |
 | Infos et performances | Diagnostics (AdMob) | Oui | Oui | Publicité, analyse |
-| Infos financières | Historique d'achat | Oui | Non | Pack sans pub |
+| Infos financières | Historique d'achat | Oui | Non | Abonnement sans pub |
 
 - Données chiffrées en transit : **Oui** (HTTPS partout).
 - L'utilisateur peut demander la suppression : **Oui** (dans l'app + URL de la page de suppression).
@@ -116,5 +116,5 @@ Les comptes sont anonymes : aucun identifiant n'est nécessaire, il suffit de ch
 Suppression du compte : Profil > Réglages > Supprimer mon compte.
 Signaler un contenu : bouton « Signaler » sur chaque expression et proposition.
 Le contenu proposé par les joueurs est filtré, voté puis validé par un modérateur avant publication.
-Le pack sans pub est un achat non consommable, restaurable dans Profil.
+L'offre sans pub est un abonnement à renouvellement automatique, restaurable dans Profil et résiliable dans les réglages de l'App Store ou de Google Play.
 ```

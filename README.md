@@ -11,7 +11,7 @@ Le jeu qui prouve que tu parles comme ton quartier. Application mobile iOS et An
 | Plateformes | iOS 16.4+ et Android 7+ (un seul code) |
 | Technologie | Expo SDK 57, React Native 0.86, Expo Router, TypeScript strict |
 | Données du joueur | Sur le téléphone (AsyncStorage) + serveur Supabase en production |
-| Monétisation | AdMob (pub récompensée + interstitiel plafonné) et pack « sans pub » via RevenueCat |
+| Monétisation | AdMob (pub récompensée + interstitiel plafonné) et abonnement « sans pub » via RevenueCat |
 | Qualité | Typecheck strict, ESLint, tests unitaires, API SQL testée (sécurité RLS) |
 
 ## Démarrer en 5 minutes
@@ -52,7 +52,7 @@ Tous les écrans de la maquette, avec l'identité visuelle (palette, Dela Gothic
 - Fin de partie, pub récompensée « Doubler mes gains », story à partager (image), défier un pote
 - Guerre des villes, Coupe des pays (avec pays de cœur), classement entre potes
 - Mon Lexik synchronisé et disponible hors ligne, fiche expression, proposer une expression, voter, signaler, bloquer un auteur, mes propositions, rôle d'ambassadeur
-- Profil : looks de Bulle, badges, pays de cœur, pack sans pub, restauration d'achat, réglages de confidentialité, suppression du compte
+- Profil : looks de Bulle, badges, pays de cœur, abonnement sans pub, restauration d'abonnement, réglages de confidentialité, suppression du compte
 
 Ajouts par rapport à la maquette, nécessaires pour publier en sécurité : tranche d'âge (moins de 13 ans refusés), consentement pub RGPD, suppression de compte, restauration d'achat, liens légaux, liste officielle des villes. Le bouton « J'ai déjà un compte » de la maquette est remplacé par « Règles et confidentialité », car les comptes sont anonymes (aucun e-mail demandé aux jeunes).
 

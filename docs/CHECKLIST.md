@@ -8,7 +8,7 @@
 - [ ] Les identifiants AdMob **réels** sont réglés dans EAS (production uniquement)
 - [ ] L'app a été testée avec les pubs de test sur iOS et Android (pub récompensée + interstitiel)
 - [ ] Le formulaire de consentement RGPD s'affiche depuis la France (ou avec `debugGeography` EEA en test)
-- [ ] Le pack sans pub s'achète et se **restaure** (compte sandbox Apple, testeur de licence Google)
+- [ ] L'abonnement sans pub s'achète, se **restaure** et se **résilie** depuis le lien de gestion (compte sandbox Apple, testeur de licence Google)
 - [ ] Hors connexion : l'app s'ouvre, on peut jouer une partie rapide, pas de plantage
 - [ ] Liens de duel : un lien envoyé ouvre bien l'écran « … te défie ! »
 - [ ] Les fichiers AASA et `assetlinks.json` sont publiés et validés (voir `LIENS-UNIVERSELS.md`)

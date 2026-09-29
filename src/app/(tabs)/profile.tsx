@@ -19,7 +19,7 @@ import { displayedStreak, playerContext, useAppStore } from '@/store/app';
 import { useContentStore } from '@/store/content';
 import { colors, onColor, stroke } from '@/theme';
 
-/** Profil : Bulle et ses looks, badges, pays de cœur, pack sans pub, réglages et confidentialité. */
+/** Profil : Bulle et ses looks, badges, pays de cœur, abonnement sans pub, réglages et confidentialité. */
 export default function Profile() {
   const toast = useToast();
   const s = useAppStore();
@@ -59,14 +59,19 @@ export default function Profile() {
     const res = await purchases.buyNoAds();
     if (res === 'purchased') {
       s.setNoAds(true);
-      toast.show('Merci ! Plus aucune pub.');
+      toast.show('Abonnement activé : plus aucune pub.');
     } else if (res === 'error') toast.show('Achat impossible pour le moment.');
   };
 
   const restore = async () => {
     const ok = await purchases.restore();
     if (ok) s.setNoAds(true);
-    toast.show(ok ? 'Achat restauré : plus de pub.' : 'Aucun achat à restaurer.');
+    toast.show(ok ? 'Abonnement restauré : plus de pub.' : 'Aucun abonnement actif à restaurer.');
+  };
+
+  const manageSubscription = async () => {
+    const opened = await purchases.manageSubscription();
+    if (!opened) toast.show("Impossible d'ouvrir la gestion de l'abonnement.");
   };
 
   const deleteAccount = () =>
@@ -222,14 +227,14 @@ export default function Profile() {
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
             <View style={{ flex: 1 }}>
               <Txt variant="display" size={20}>
-                Pack sans pub
+                Abonnement sans pub
               </Txt>
               <Txt variant="semi" size={14} style={{ marginTop: 4 }}>
-                Plus aucune pub. Les bonus restent à toi.
+                Renouvelé automatiquement. Plus aucune pub tant qu’il est actif, résiliable à tout moment dans le store.
               </Txt>
             </View>
             <Button
-              label={s.noAds ? 'Activé' : price.data ?? '…'}
+              label={s.noAds ? 'Abonné' : price.data ?? '…'}
               bg={colors.ink}
               color={colors.lime}
               align="center"
@@ -238,11 +243,15 @@ export default function Profile() {
               onPress={buy}
             />
           </View>
-          {!s.noAds ? (
-            <Txt variant="bold" size={14} accessibilityRole="button" onPress={restore} style={{ textDecorationLine: 'underline' }}>
-              Restaurer mes achats
+          {s.noAds ? (
+            <Txt variant="bold" size={14} accessibilityRole="button" onPress={manageSubscription} style={{ textDecorationLine: 'underline' }}>
+              Gérer ou résilier mon abonnement
             </Txt>
-          ) : null}
+          ) : (
+            <Txt variant="bold" size={14} accessibilityRole="button" onPress={restore} style={{ textDecorationLine: 'underline' }}>
+              Restaurer mon abonnement
+            </Txt>
+          )}
         </Brutal>
       ) : null}
 

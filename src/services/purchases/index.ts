@@ -7,5 +7,7 @@ export const purchases: PurchasesService = {
   buyNoAds: async () => 'unavailable',
   restore: async () => false,
   hasNoAds: async () => false,
+  subscribeNoAds: () => () => undefined,
+  manageSubscription: async () => false,
   available: false,
 };

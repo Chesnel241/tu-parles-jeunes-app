@@ -124,7 +124,7 @@ export default function Result() {
                   {doubling ? 'Chargement de la pub…' : 'Doubler mes gains'}
                 </Txt>
                 <Txt variant="semi" size={13}>
-                  {app.noAds ? 'Pack sans pub : c’est cadeau' : 'Une courte pub, et c’est doublé'}
+                  {app.noAds ? 'Abonnement sans pub actif : c’est cadeau' : 'Une courte pub, et c’est doublé'}
                 </Txt>
               </View>
               <Txt variant="display" size={22}>

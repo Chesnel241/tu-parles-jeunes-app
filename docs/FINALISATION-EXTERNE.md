@@ -17,7 +17,7 @@ Le code refuse désormais un build `production` tant que la configuration critiq
 ### Bloqué par des informations ou validations du propriétaire
 
 - AdMob : compléter le profil de paiement. Tant qu'il ne l'est pas, Google n'examine pas les applications et ne diffuse pas les annonces.
-- Google Play : configurer le compte marchand avant de créer le produit ponctuel `no_ads`. Un test fermé avec au moins 12 testeurs pendant 14 jours est ensuite obligatoire avant la demande d'accès à la production.
+- Google Play : configurer le compte marchand avant de créer l'abonnement mensuel `tpj_no_ads_monthly`. Un test fermé avec au moins 12 testeurs pendant 14 jours est ensuite obligatoire avant la demande d'accès à la production.
 - RevenueCat : créer le projet, les applications, l'entitlement `no_ads` et l'offering après création des produits dans les deux stores.
 - Apple : rétablir l'accès App Store Connect, créer la fiche et le produit intégré, puis configurer TestFlight.
 - Juridique : fournir l'identité de l'éditeur, le domaine HTTPS et l'adresse de support afin de remplacer les placeholders et publier les pages légales.

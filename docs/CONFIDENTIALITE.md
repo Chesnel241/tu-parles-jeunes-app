@@ -27,7 +27,7 @@ L'app affiche des publicités fournies par Google AdMob. Dans l'Union européenn
 
 ## Achats
 
-Le pack sans pub est vendu par l'App Store ou Google Play. Nous ne voyons jamais tes informations de paiement. Le service RevenueCat nous indique seulement si le pack est actif.
+L'abonnement sans pub est vendu par l'App Store ou Google Play. Nous ne voyons jamais tes informations de paiement. Le service RevenueCat nous indique seulement si l'abonnement est actif.
 
 ## Où sont les données ?
 

@@ -21,5 +21,5 @@ export const LOOKS: readonly LookItem[] = [
 
 export const STARTER_COINS = 200;
 
-/** Identifiant de l'entitlement RevenueCat du pack sans pub. */
+/** Identifiant de l'entitlement RevenueCat de l'abonnement sans pub. */
 export const NO_ADS_ENTITLEMENT = 'no_ads';

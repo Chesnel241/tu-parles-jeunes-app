@@ -11,7 +11,7 @@ Ce guide suit l'ordre réel des opérations. Compte 2 à 3 semaines entre le pre
 | [Google Play Console](https://play.google.com/console) | 25 $ une fois | Publier sur Google Play |
 | [Supabase](https://supabase.com) | Gratuit au lancement | Classements, duels, votes, modération |
 | [AdMob](https://admob.google.com) | Gratuit | Publicités |
-| [RevenueCat](https://www.revenuecat.com) | Gratuit jusqu'à un certain revenu | Pack sans pub |
+| [RevenueCat](https://www.revenuecat.com) | Gratuit jusqu'à un certain revenu | Abonnement sans pub |
 
 Conseil : crée les comptes Apple et Google au nom de ta structure (Logique Prod) si tu veux que le nom affiché sur les stores soit celui de l'entreprise. Apple demande alors un numéro D-U-N-S (gratuit, quelques jours).
 
@@ -33,12 +33,12 @@ Suis [supabase/README.md](../supabase/README.md). À la fin, tu as `EXPO_PUBLIC_
 4. Dans AdMob > Paramètres de l'app > Contenu : classe les annonces **« T » (ados)** au maximum et bloque les catégories sensibles (rencontres, jeux d'argent, alcool…).
 5. Tant que tu développes, l'app utilise **toujours** les annonces de test de Google (voir `src/services/ads/index.native.ts`). Ne clique jamais sur tes propres vraies pubs : c'est la cause n°1 de suspension AdMob.
 
-## Étape 4 : RevenueCat (pack sans pub)
+## Étape 4 : RevenueCat (abonnement sans pub)
 
-1. Dans App Store Connect et Google Play Console, crée un produit **non consommable** « Pack sans pub » (par exemple `tpj_no_ads`, 3,99 €).
-2. Dans RevenueCat : crée le projet, connecte les deux stores, crée l'**entitlement** `no_ads`, attache les produits, crée une **offering** par défaut avec un package « Lifetime ».
+1. Dans App Store Connect et Google Play Console, crée un abonnement **auto-renouvelable mensuel** « Sans pub » (par exemple `tpj_no_ads_monthly`). Le prix est défini dans chaque store ; il doit être affiché à l'utilisateur avant l'achat. Une formule annuelle peut être ajoutée plus tard.
+2. Dans RevenueCat : crée le projet, connecte les deux stores, crée l'**entitlement** `no_ads`, attache les abonnements équivalents iOS et Android, puis crée une **offering** par défaut avec un package « Monthly » (et éventuellement « Annual »).
 3. Récupère les clés publiques iOS et Android (`appl_…` et `goog_…`).
-4. Sans clé, le pack sans pub est simplement masqué dans l'app : tu peux publier sans, et l'ajouter plus tard.
+4. Sans clé, l'abonnement sans pub est simplement masqué dans l'app : tu peux publier sans, et l'ajouter plus tard.
 
 ## Étape 5 : les variables d'environnement dans EAS
 

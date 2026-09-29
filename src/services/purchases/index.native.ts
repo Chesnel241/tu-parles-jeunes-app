@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import type { CustomerInfoUpdateListener } from 'react-native-purchases';
 import { NO_ADS_ENTITLEMENT } from '@/data/shop';
 import { config } from '../config';
 import type { PurchaseResult, PurchasesService } from './types';
@@ -33,13 +34,27 @@ async function init(appUserId?: string): Promise<void> {
 async function noAdsPackage() {
   if (!rc || !configured) return null;
   const offerings = await rc.default.getOfferings();
-  return offerings.current?.lifetime ?? offerings.current?.availablePackages[0] ?? null;
+  const offering = offerings.current;
+  if (!offering) return null;
+
+  // L'offre sans pub est un abonnement. On refuse volontairement un package
+  // Lifetime afin qu'une ancienne configuration RevenueCat ne transforme pas
+  // accidentellement l'abonnement en achat définitif.
+  return (
+    offering.monthly ??
+    offering.annual ??
+    offering.availablePackages.find((pkg) => Boolean(pkg.product.subscriptionPeriod)) ??
+    null
+  );
 }
 
 async function noAdsPrice(): Promise<string | null> {
   try {
     const pkg = await noAdsPackage();
-    return pkg?.product.priceString ?? null;
+    if (!pkg) return null;
+    const suffix =
+      pkg.product.subscriptionPeriod === 'P1M' ? ' / mois' : pkg.product.subscriptionPeriod === 'P1Y' ? ' / an' : '';
+    return `${pkg.product.priceString}${suffix}`;
   } catch {
     return null;
   }
@@ -77,12 +92,35 @@ async function hasNoAds(): Promise<boolean> {
   }
 }
 
+function subscribeNoAds(listener: (active: boolean) => void): () => void {
+  if (!rc || !configured) return () => undefined;
+  const onUpdate: CustomerInfoUpdateListener = (info) => {
+    listener(Boolean(info.entitlements.active[NO_ADS_ENTITLEMENT]));
+  };
+  rc.default.addCustomerInfoUpdateListener(onUpdate);
+  return () => {
+    rc?.default.removeCustomerInfoUpdateListener(onUpdate);
+  };
+}
+
+async function manageSubscription(): Promise<boolean> {
+  if (!rc || !configured) return false;
+  try {
+    await rc.default.showManageSubscriptions();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export const purchases: PurchasesService = {
   init,
   noAdsPrice,
   buyNoAds,
   restore,
   hasNoAds,
+  subscribeNoAds,
+  manageSubscription,
   get available() {
     return Boolean(rc) && configured;
   },
