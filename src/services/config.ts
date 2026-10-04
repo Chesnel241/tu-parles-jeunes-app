@@ -1,3 +1,5 @@
+import Constants from 'expo-constants';
+
 /**
  * Configuration publique lue au build (variables EXPO_PUBLIC_*).
  * Rien de secret ici : tout ce qui est dans l'app peut être lu par un curieux.
@@ -8,6 +10,7 @@ function env(value: string | undefined): string | undefined {
 }
 
 export const config = {
+  isProductionBuild: Constants.expoConfig?.extra?.isProductionBuild === true,
   backend: (env(process.env.EXPO_PUBLIC_BACKEND) === 'supabase' ? 'supabase' : 'local') as 'local' | 'supabase',
   supabaseUrl: env(process.env.EXPO_PUBLIC_SUPABASE_URL),
   supabaseAnonKey: env(process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY),

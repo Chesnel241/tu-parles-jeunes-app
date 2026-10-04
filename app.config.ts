@@ -16,6 +16,7 @@ const IS_PRODUCTION_BUILD = process.env.EAS_BUILD_PROFILE === 'production';
 // Identifiants d'application AdMob de test publiés par Google.
 const ADMOB_ANDROID_TEST_APP_ID = 'ca-app-pub-3940256099942544~3347511713';
 const ADMOB_IOS_TEST_APP_ID = 'ca-app-pub-3940256099942544~1458002511';
+const ADMOB_TEST_PUBLISHER_ID = 'ca-app-pub-3940256099942544';
 
 const BUNDLE_ID = process.env.APP_BUNDLE_ID ?? 'com.logiqueprod.tuparlesjeune';
 const EAS_PROJECT_ID = 'fd2c392c-65ce-4ded-bc08-891455c43f89';
@@ -23,7 +24,7 @@ const SHARE_BASE_URL = process.env.EXPO_PUBLIC_SHARE_BASE_URL ?? 'https://tuparl
 const SHARE_HOST = new URL(SHARE_BASE_URL).hostname;
 
 if (IS_PRODUCTION_BUILD) {
-  const required = [
+  const errors = [
     'EXPO_PUBLIC_SUPABASE_URL',
     'EXPO_PUBLIC_SUPABASE_ANON_KEY',
     'ADMOB_ANDROID_APP_ID',
@@ -40,9 +41,22 @@ if (IS_PRODUCTION_BUILD) {
     'EXPO_PUBLIC_SHARE_BASE_URL',
     'EXPO_PUBLIC_SUPPORT_EMAIL',
   ].filter((key) => !process.env[key]?.trim());
-  if (process.env.EXPO_PUBLIC_BACKEND !== 'supabase') required.push('EXPO_PUBLIC_BACKEND=supabase');
-  if (required.length) {
-    throw new Error(`Build de production refusé : configuration manquante (${required.join(', ')}).`);
+  if (process.env.EXPO_PUBLIC_BACKEND !== 'supabase') errors.push('EXPO_PUBLIC_BACKEND=supabase');
+  for (const key of ['EXPO_PUBLIC_REVENUECAT_IOS_KEY', 'EXPO_PUBLIC_REVENUECAT_ANDROID_KEY']) {
+    if (process.env[key]?.startsWith('test_')) errors.push(`${key}=clé Test Store`);
+  }
+  for (const key of [
+    'ADMOB_ANDROID_APP_ID',
+    'ADMOB_IOS_APP_ID',
+    'EXPO_PUBLIC_ADMOB_REWARDED_ANDROID',
+    'EXPO_PUBLIC_ADMOB_REWARDED_IOS',
+    'EXPO_PUBLIC_ADMOB_INTERSTITIAL_ANDROID',
+    'EXPO_PUBLIC_ADMOB_INTERSTITIAL_IOS',
+  ]) {
+    if (process.env[key]?.startsWith(ADMOB_TEST_PUBLISHER_ID)) errors.push(`${key}=identifiant Google de test`);
+  }
+  if (errors.length) {
+    throw new Error(`Build de production refusé : configuration invalide (${errors.join(', ')}).`);
   }
 }
 
@@ -119,8 +133,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'react-native-google-mobile-ads',
       {
-        androidAppId: process.env.ADMOB_ANDROID_APP_ID ?? ADMOB_ANDROID_TEST_APP_ID,
-        iosAppId: process.env.ADMOB_IOS_APP_ID ?? ADMOB_IOS_TEST_APP_ID,
+        androidAppId: IS_PRODUCTION_BUILD ? process.env.ADMOB_ANDROID_APP_ID! : ADMOB_ANDROID_TEST_APP_ID,
+        iosAppId: IS_PRODUCTION_BUILD ? process.env.ADMOB_IOS_APP_ID! : ADMOB_IOS_TEST_APP_ID,
         // On attend le consentement RGPD avant toute mesure publicitaire.
         // L'app ne demande pas le suivi publicitaire iOS (ATT) : public jeune, pubs non ciblées par défaut.
         delayAppMeasurementInit: true,
@@ -128,6 +142,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ],
   ],
   extra: {
+    isProductionBuild: IS_PRODUCTION_BUILD,
     eas: {
       projectId: EAS_PROJECT_ID,
     },

@@ -22,6 +22,21 @@ const required = [
 const errors = required.filter((key) => !process.env[key]?.trim()).map((key) => `${key} manque`);
 if (process.env.EXPO_PUBLIC_BACKEND !== 'supabase') errors.push('EXPO_PUBLIC_BACKEND doit valoir supabase');
 
+for (const key of ['EXPO_PUBLIC_REVENUECAT_IOS_KEY', 'EXPO_PUBLIC_REVENUECAT_ANDROID_KEY']) {
+  if (process.env[key]?.startsWith('test_')) errors.push(`${key} utilise encore la clé Test Store RevenueCat`);
+}
+
+for (const key of [
+  'ADMOB_ANDROID_APP_ID',
+  'ADMOB_IOS_APP_ID',
+  'EXPO_PUBLIC_ADMOB_REWARDED_ANDROID',
+  'EXPO_PUBLIC_ADMOB_REWARDED_IOS',
+  'EXPO_PUBLIC_ADMOB_INTERSTITIAL_ANDROID',
+  'EXPO_PUBLIC_ADMOB_INTERSTITIAL_IOS',
+]) {
+  if (process.env[key]?.startsWith('ca-app-pub-3940256099942544')) errors.push(`${key} utilise encore un identifiant Google de test`);
+}
+
 for (const key of ['EXPO_PUBLIC_PRIVACY_URL', 'EXPO_PUBLIC_TERMS_URL', 'EXPO_PUBLIC_ACCOUNT_DELETION_URL', 'EXPO_PUBLIC_SHARE_BASE_URL']) {
   const value = process.env[key];
   if (value) {

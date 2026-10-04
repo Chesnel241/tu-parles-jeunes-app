@@ -27,8 +27,9 @@ function unitId(kind: 'rewarded' | 'interstitial'): string {
   const real = kind === 'rewarded'
     ? (ios ? config.admob.rewardedIos : config.admob.rewardedAndroid)
     : (ios ? config.admob.interstitialIos : config.admob.interstitialAndroid);
-  // En développement ou sans identifiant configuré : TOUJOURS les pubs de test (pas de risque de ban).
-  if (__DEV__ || !real) return kind === 'rewarded' ? TestIds.REWARDED : TestIds.INTERSTITIAL;
+  // Tout build interne utilise TOUJOURS les pubs de test, même si une variable
+  // EAS partagée contient par erreur un identifiant réel.
+  if (!config.isProductionBuild || __DEV__ || !real) return kind === 'rewarded' ? TestIds.REWARDED : TestIds.INTERSTITIAL;
   return real;
 }
 
