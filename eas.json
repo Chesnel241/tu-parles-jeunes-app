@@ -20,6 +20,14 @@
         "buildType": "apk"
       }
     },
+    "play-internal": {
+      "environment": "preview",
+      "channel": "preview",
+      "autoIncrement": true,
+      "android": {
+        "buildType": "app-bundle"
+      }
+    },
     "production": {
       "environment": "production",
       "channel": "production",

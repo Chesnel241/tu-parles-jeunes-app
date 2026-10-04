@@ -62,6 +62,7 @@
     "seed:generate": "npx tsx scripts/generate-seed.ts",
     "build:dev": "npx eas-cli@latest build --profile development",
     "build:preview": "npx eas-cli@latest build --profile preview",
+    "build:play-internal": "npx eas-cli@latest build --profile play-internal --platform android",
     "build:prod": "npx eas-cli@latest build --profile production --platform all",
     "submit:prod": "npx eas-cli@latest submit --profile production --platform all",
     "update:preview": "npx eas-cli@latest update --channel preview",
