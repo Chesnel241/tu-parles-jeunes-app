@@ -24,11 +24,18 @@ export const config = {
     ios: env(process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY),
     android: env(process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY),
   },
-  privacyUrl: env(process.env.EXPO_PUBLIC_PRIVACY_URL) ?? 'https://tuparlesjeune.app/confidentialite',
-  termsUrl: env(process.env.EXPO_PUBLIC_TERMS_URL) ?? 'https://tuparlesjeune.app/cgu',
-  accountDeletionUrl: env(process.env.EXPO_PUBLIC_ACCOUNT_DELETION_URL) ?? 'https://tuparlesjeune.app/supprimer-mon-compte',
-  shareBaseUrl: env(process.env.EXPO_PUBLIC_SHARE_BASE_URL) ?? 'https://tuparlesjeune.app',
-  supportEmail: env(process.env.EXPO_PUBLIC_SUPPORT_EMAIL) ?? 'contact@tuparlesjeune.app',
+  privacyUrl:
+    env(process.env.EXPO_PUBLIC_PRIVACY_URL) ??
+    'https://chesnel241.github.io/tu-parles-jeunes-app/confidentialite/',
+  termsUrl:
+    env(process.env.EXPO_PUBLIC_TERMS_URL) ??
+    'https://chesnel241.github.io/tu-parles-jeunes-app/cgu/',
+  accountDeletionUrl:
+    env(process.env.EXPO_PUBLIC_ACCOUNT_DELETION_URL) ??
+    'https://chesnel241.github.io/tu-parles-jeunes-app/suppression-compte/',
+  shareBaseUrl:
+    env(process.env.EXPO_PUBLIC_SHARE_BASE_URL) ?? 'https://chesnel241.github.io/tu-parles-jeunes-app',
+  supportEmail: env(process.env.EXPO_PUBLIC_SUPPORT_EMAIL) ?? 'ekoghachesneloff@gmail.com',
 } as const;
 
 export const isSupabaseConfigured = config.backend === 'supabase' && Boolean(config.supabaseUrl && config.supabaseAnonKey);

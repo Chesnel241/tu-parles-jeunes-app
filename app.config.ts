@@ -20,7 +20,8 @@ const ADMOB_TEST_PUBLISHER_ID = 'ca-app-pub-3940256099942544';
 
 const BUNDLE_ID = process.env.APP_BUNDLE_ID ?? 'com.logiqueprod.tuparlesjeune';
 const EAS_PROJECT_ID = 'fd2c392c-65ce-4ded-bc08-891455c43f89';
-const SHARE_BASE_URL = process.env.EXPO_PUBLIC_SHARE_BASE_URL ?? 'https://tuparlesjeune.app';
+const SHARE_BASE_URL =
+  process.env.EXPO_PUBLIC_SHARE_BASE_URL ?? 'https://chesnel241.github.io/tu-parles-jeunes-app';
 const SHARE_HOST = new URL(SHARE_BASE_URL).hostname;
 
 if (IS_PRODUCTION_BUILD) {
